@@ -1,7 +1,7 @@
 # Building a Neural Network with Python from scratch
 
 This is a tutorial on how to write a basic Neural Network from scratch
-to perform classification, explaining important concepts
+to perform binary classification, explaining important concepts
 on the way. I've been meaning to do this for   
 a long time, because writing something down makes me understand   
 something better, and because I love explaining stuff!
@@ -9,19 +9,36 @@ something better, and because I love explaining stuff!
 I will try to give as much practical examples as I can, 
 both using math and code examples. I hope you have fun learning!
 
-## What is a Neural Network
+## What is a Neural Network? 
 
 A Neural Network is an algorithm that is able to learn
-patterns and predict patterns using input. This could be
-for example predicting the weather based
-on historical weather data, or for example
-recognizing pandas based on pictures of pandas the
-network has been trained on earlier. 
+a function and use this function to create new
+output. More formally:
+
+
+
+
+
+The x and y here could be literally anything. As an example
+x could be the number of hours
+you work out, and the y the number of calories burned. A Neural
+Network could be used to approximate the relationship
+(f) between these two. Whats more, once a Neural Network
+has been trained, you can use it to predict calories burned
+by just filling in the number of hours worked out.
+
+The power of Neural Networks is that with the right
+data and architecture they are able to learn
+very complicated relationships, and they can be used
+within various field. This is also
+why they are very popular. Neural Networks are being used
+today for all kinds of tasks such speech recognition, 
+picture recognition, or even music generation.
 
 Despite being inspired by our brain, a 
 Neural Network is actually very different.
 Our brain is vastly more complicated and most
-of our brain is currently not well understood, 
+of our brain is currently not very well understood, 
 so an elaborate comparison will
 not do any justice to our brains complexity.
 That being said, there are alot of cool things
@@ -42,7 +59,7 @@ how Neural Networks work however, we will code one from scratch.
 The most important thing when working with Neural Networks
 is not the architecture, not the amount of layers, 
 or the amount of weights: Its the data. Why? You can
-build the largest and most complex network you want,
+build the largest and most complex Neural Network you want,
 one rule always stays the same: Garbage in = Garbage out.
 So at the input data we start! 
 
@@ -101,7 +118,7 @@ the class, and will be the Neural Networks output.
 Note that for all these examples we already know the shrub species. The
 reason for this is that our network first needs to learn how to use
 leave size and height to distinguish between different shrub species.
-Data where you already know the class you want to predict is also
+Data in which you already know the class you want to predict is also
 called labeled data.
 
 Before we can use this to train our network however, there
@@ -112,8 +129,8 @@ the Alder Buckthorn Shrub'.
 
 For the input features, note that Leave size is in centimeters,
 and shrub height in meters. We will convert all these input values
-to 0 - 1 range. One of the reasons to do this is to prevent that large features (such as
-the shrub height in this case) have a disproportionate effect
+to 0 - 1 range. One of the reasons to do this is to prevent large features (such as
+the shrub height in this case) having a disproportionate effect
 on the training. Here is the full preprocessing code:
 
 ```python
@@ -139,7 +156,11 @@ preprocessed_df.insert(2, 'Shrub species name', class_column)
 preprocessed_df.to_csv('preprocessed_shrub_dataset.csv')
 ```
 
-The Neural Network
+Neural Network Architecture
+
+The most basic unit of a Neural Network is what we call
+the perceptron. 
+
 
 In one of its most basic layouts a Neural Network
 consists of an input layer, one or more hidden layers, and an output
@@ -156,8 +177,6 @@ Picture
 
 
 
-
-A neuron is a basic mathematical unit, which takes in 
 
 
 
