@@ -25,8 +25,8 @@ new applications are being created every day.
 The power of Neural Networks is that with the right
 data and architecture a Neural Network is able to learn
 very complicated relationships. Neural Networks also
-can be used in many different situations. Neural Networks are being used
-today for all kinds of tasks and fields such speech recognition, 
+can be used in many different situations: Today, Neural Networks
+are being used today in all kinds of tasks and fields such speech recognition, 
 picture recognition, or even music generation.
 
 ## Our example Network
@@ -143,47 +143,124 @@ preprocessed_df.to_csv('preprocessed_shrub_dataset.csv')
 
 Neural Network Architecture
 
-The most basic unit of a Neural Network is what we call
-the perceptron. 
+In this example we will be looking at a type
+of Neural Network called a 'Feedforward Neural Network'.
+In Feedforward Neural Network the data flow is unidirectional:
+data comes in at the input, and goes out at the output.
+
+The most fundamental block of a Neural Network is the neuron.
+The neuron is a unit that takes input, does some mathematical
+transformation, and produces output. For example:
+
+equation
 
 
-In one of its most basic layouts a Neural Network
-consists of an input layer, one or more hidden layers, and an output
-layer. A neural network can have as many hidden layers as you want,
-but for this example, we will start with just 1 hidden layer.
 
-Each of these layers is composed of what we call 'neurons'. We will have 2 neurons
+The weights and the bias are the learnable parameters for
+the Neural Network. In other words, the Neural Network will
+have to find the optimal values for these itself during training.
+Most commonly at the start of the training, the weights are initialised
+as small random values between 0 and 1, and the bias is initialised
+at 0. 
+
+These neurons are organised in layers. We will have 2 neurons
 in the starting layer, for we have 2 features (Leave size and Shrub
 height), and 1 neuron in the final layer to predict the class.
 The hidden layer can have any amount of neurons. Its up to choose
-how many. For this example we will choose 3 neurons.
+how many. For this example we will choose 3 neurons
+
+Note that only
+from layers 2 and 3 a transformation is computed. The input layer contains
+the values of the input as they are, without midification. 
+Every input neuron is connected to every neuron in the hidden
+layer. This means that with 2 input neurons and 3 neurons in the
+hidden layer we will have (2 x 3 ) 6 weights in between the two.
+The hidden layer and the final layer will be connected with
+3 (1 x 3) weights. THis is how our Neural Network looks like right now: 
+
 
 Picture
 
 
 
+Note that the above picture can be helpfull
+to know how the architecture of a Neural Network looks, like
+but that whats actually happening is this:
+
+equation
 
 
 
-These layers are connected with what we call 'weights'.
-Every input neuron is connected to every neuron in the hidden
-layer. This means that with 2 input neurons and 3 neurons in the
-hidden layer we will have (2 x 3 ) 6 weights in between the two.
-The hidden layer and the final layer will be connected with
-3 (1 x 3) weights. The weights are the parameters whos
-values have to be learned by the Neural Network. The weights
-usually start at a random value before training, and
-are changed during training.  
+As an example, take as input a leaf size of .. and shrub height of ...
 
-Picture2
 
-During the forward pass, the data in the input layer is
-transformed to the data in the hidden layer by multiplying
-them with the weights between these layers, and finally
-from the hidden layer to the output layer by again multiplying them
-with the weights between the last two layers. For the purpose of demonstration,
- this is what the math behind this could look like, using the first
- row of our dataset, and random values for the weights :
+picture
+
+
+
+þ
+There is still one important ingredient missing from our Neural Network:
+The activation function.
+Suppose all that happened at the layers was a multiplication with some
+numbers, and an addition of some other numbers. That means that at its best
+the Neural Network would be able to learn a linear function. In other words
+ the output of the Neural Network would always be:
+
+equation
+
+
+This is where the activation function becomes very important. What
+the activation function does is introduce some kind of nonlinearity to the
+output. There are actually many different kinds of activation functions,
+but the most common (and the most simple) being ReLu:
+
+
+figure
+
+
+
+Implementing the ReLu function would look like this:
+
+
+
+code
+
+
+
+Another kind of activiation function is the Sigmoid:
+
+
+
+
+picture
+
+
+An implemented version of the sigmoid looks like this:
+
+
+
+
+We will add ReLu activation to our hidden layer, and
+Sigmoid to our output layer. This is how our final model
+will look like:
+
+
+Equation
+
+
+
+
+Adding ReLu and the Sigmoid activation to the example above, we now
+get ....
+
+
+Picture
+
+
+
+equation 4
+
+
 
 
  
@@ -218,19 +295,5 @@ Fig3
 
 
 Now that we have this number
-
-
-
-
-
-
-A valid question would be 'how do I know how many hidden
-layers I should choose, or how many neurons in the hidden layer'.
-There is no easy way to answer this question. There are many
-heuristics, but it is intirely dependent on the problem and
-the data you are working with and often times involves many
-attempts of trial and error. For now just remember that the
-smallest network that is able to explain the variance in your
-data is the best network - 
 
 
