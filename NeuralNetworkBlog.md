@@ -1,42 +1,36 @@
-# Building a Neural Network with Python from scratch
+# Understanding Neural Networks using real examples
 
-This is a tutorial on how to write a basic Neural Network from scratch
-to perform binary classification, using Python. I've been meaning to do this for   
-a long time, because writing something down makes me understand   
-something better, and because I love explaining stuff!
+A Neural Network is a computer algorithm inspired
+by the human brain (hence Neural), composed of a
+network of artificial neurons. This network of
+aritificial neurons is able to learn patterns from
+example data, and is able to use this learned knowledge to
+perform some task.
 
-I will try to give as much practical examples as I can, 
-both using math and coding examples. I hope you have fun learning!
+Despite their consistent
+rise in popularity in recent years, neural networks have been
+around for quite a while: Frank Rosenblatt laid out
+the fundational building blocks for the neural network in
+1958. Thats over 60 years ago!
 
-## What is a Neural Network? 
+Over the years Neural Networks were improved, forgotten,
+improved, and forgotten again. For years
+neural networks couldn't do much, 
+because well, computers couldn't do much. With the
+enormous rise of computing power however, neural
+networks have proven to be invaluable in many many
+areas. With this technology becoming ever more
+usefull and adopted with each year, it is very much worth your
+time to learn how this technology works.
 
-A Neural Network is an algorithm that is able to learn
-patterns using example data, and once trained predict
-patterns using new input. Despite being inspired by our brain, a 
-Neural Network is actually very different.
-Our brain is vastly more complicated and most
-of our brain is currently not very well understood, 
-so an elaborate comparison will
-not do any justice to our brains complexity.
-That being said, there are alot of cool things
-you can do with Neural Networks, and 
-new applications are being created every day.
-
-The power of Neural Networks is that with the right
-data and architecture a Neural Network is able to learn
-very complicated relationships. Neural Networks also
-can be used in many different situations: Today, Neural Networks
-are being used today in all kinds of tasks and fields such speech recognition, 
-picture recognition, or even music generation.
-
-## Our example Network
-
-In this example, using a self-built Neural Network we will
-attempt to classify different kinds of shrubs based on their
-leaf size and height. Mind that normally when working with
-Neural Networks you will probably use a high-level API 
-such as Keras or PyTorch. For the purpose of understanding
-how Neural Networks work however, we will code one from scratch.
+In this example we will attempt to learn a neural
+network how to classify different types of shrubs based
+on shrub height and the shrub's leave size.
+We will go through the process of
+preprocessing data, defining a neural network architecture,
+and finally training the neural network using our preprocessed
+data. Some familiarity with Python 3, Pandas and Keras
+will help. 
 
 ## Input Data
 
@@ -164,14 +158,10 @@ as small random values between 0 and 1, and the bias is initialised
 at 0. 
 
 These neurons are organised in layers. We will have 2 neurons
-in the starting layer, for we have 2 features (Leave size and Shrub
-height), and 1 neuron in the final layer to predict the class.
-The hidden layer can have any amount of neurons. Its up to choose
-how many. For this example we will choose 3 neurons
+in the input layer, 3 neurons in the hidden layer, and 1 
+neuron in the final layer to predict the class.Note that only
+in the hidden layer and the final layer a transformation is computed. The input layer contains the values of the input as they are.
 
-Note that only
-from layers 2 and 3 a transformation is computed. The input layer contains
-the values of the input as they are, without midification. 
 Every input neuron is connected to every neuron in the hidden
 layer. This means that with 2 input neurons and 3 neurons in the
 hidden layer we will have (2 x 3 ) 6 weights in between the two.
