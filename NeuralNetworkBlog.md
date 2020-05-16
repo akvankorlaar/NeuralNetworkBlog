@@ -1,6 +1,6 @@
-# Understanding Neural Networks using real examples
+# Understanding neural networks using real examples
 
-A Neural Network is a computer algorithm inspired
+A neural network is a computer algorithm inspired
 by the human brain (hence Neural), composed of a
 network of artificial neurons. This network of
 aritificial neurons is able to learn patterns from
@@ -13,7 +13,7 @@ around for quite a while: Frank Rosenblatt laid out
 the fundational building blocks for the neural network in
 1958. Thats over 60 years ago!
 
-Over the years Neural Networks were improved, forgotten,
+Over the years neural networks were improved, forgotten,
 improved, and forgotten again. For years
 neural networks couldn't do much, 
 because well, computers couldn't do much. With the
@@ -34,9 +34,9 @@ will help.
 
 ## Input Data
 
-The most important thing when working with Neural Networks
+The most important thing when working with neural networks
 is not its architecture: Its the data. Why? You can
-build the largest and most complex Neural Network you want,
+build the largest and most complex neural network you want,
 one rule always stays the same: Garbage in = Garbage out.
 So at the input data we start! 
 
@@ -85,20 +85,16 @@ Fig1: Picture of the dataset
 
 
 So our dataset has 100 rows, containing Leave size and shrub
-height of two different shrub species. Our tasks will be firstly to learn
-the relationship between Leave size, shrub height and shrub species       
-and secondly to be able
-to predict the shrub species based on its size and height using
-a Neural Network.
-In this example the leave size and shrub height are called the
-features, and will be the Neural Networks input. The shrub species is called
-the class, and will be the Neural Networks output.
+height of two different shrub species. The task of the Neural Network
+will be to, given some shrubs leave size, and some shrubs height,
+to predict the shrub species. In this example the leave size and shrub height are called the input features, and will be the neural networks input. The shrub species is called the class, and will be the neural networks output.
 
 Note that for all these examples we already know the shrub species. The
 reason for this is that our network first needs to learn how to use
 leave size and height to distinguish between different shrub species.
 Data in which you already know the class you want to predict is also
-called labeled data.
+called labeled data. It is commonly hard to get alot of labeled data,
+because it often involes alot of manual work to create .
 
 Before we can use this to train our network however, there
 is some preprocessing we need to do. In itself the network
@@ -108,8 +104,8 @@ the Alder Buckthorn Shrub'.
 
 For the input features, note that Leave size is in centimeters,
 and shrub height in meters. We will convert all these input values
-to 0 - 1 range. One of the reasons to do this is to prevent large features (such as
-the shrub height in this case) having a disproportionate effect
+to 0 - 1 range. One of the reasons to do this is to prevent a large feature (such as
+the shrub height in this case) has a disproportionate effect
 on the training. Here is the full preprocessing code:
 
 ```python
@@ -138,63 +134,51 @@ preprocessed_df.to_csv('preprocessed_shrub_dataset.csv')
 Neural Network Architecture
 
 In this example we will be looking at a type
-of Neural Network called a 'Feedforward Neural Network'.
-In Feedforward Neural Network the data flow is unidirectional:
+of neural network called a 'Feedforward neural network'.
+In Feedforward neural network the data flow is unidirectional:
 data comes in at the input, and goes out at the output.
 
-The most fundamental block of a Neural Network is the neuron.
-The neuron is a unit that takes input, does some mathematical
-transformation, and produces output. For example:
+The most fundamental block of a neural network is the artificial
+neuron. The artificial neuron is a unit that takes input,
+does some mathematical transformation, and produces output.
+The mathematical transformation most commonly consists of multiplying some
+value by a weight value, and adding some bias. For example:
 
 equation
 
 
 
-The weights and the bias are the learnable parameters for
-the Neural Network. In other words, the Neural Network will
-have to find the optimal values for these itself during training.
-Most commonly at the start of the training, the weights are initialised
-as small random values between 0 and 1, and the bias is initialised
-at 0. 
-
 These neurons are organised in layers. We will have 2 neurons
-in the input layer, 3 neurons in the hidden layer, and 1 
-neuron in the final layer to predict the class.Note that only
-in the hidden layer and the final layer a transformation is computed. The input layer contains the values of the input as they are.
-
-Every input neuron is connected to every neuron in the hidden
-layer. This means that with 2 input neurons and 3 neurons in the
-hidden layer we will have (2 x 3 ) 6 weights in between the two.
-The hidden layer and the final layer will be connected with
-3 (1 x 3) weights. THis is how our Neural Network looks like right now: 
+in the input layer, a second layer with 3 neurons, a third
+layer with 3 neurons, and a final layer with 1 neuron.
+From layer to layer, every neuron is connected using weights.
+For example, this means that with 2 neurons in the input layer
+and 3 neurons in the second layer we will have (2 x 3 )
+6 weights in between. The following is a graphical representation
+of our Neural Network right now: 
 
 
 Picture
 
 
 
-Note that the above picture can be helpfull
-to know how the architecture of a Neural Network looks, like
-but that whats actually happening is this:
+ The following is an
+equavalent mathematical representation of the entire neural network: 
+
 
 equation
 
 
 
-As an example, take as input a leaf size of .. and shrub height of ...
-
-
-picture
 
 
 
-þ
-There is still one important ingredient missing from our Neural Network:
-The activation function.
-Suppose all that happened at the layers was a multiplication with some
-numbers, and an addition of some other numbers. That means that at its best
-the Neural Network would be able to learn a linear function. In other words
- the output of the Neural Network would always be:
+There is still an important ingredient missing from our neural network:
+Activation functions. Suppose all that happened with the data from
+input to output was multiplication with some weights, and addition
+of some bias. That means that at its best
+the neural network would be able to learn a linear function. In other words
+ the output of the neural network would always be:
 
 equation
 
@@ -202,7 +186,8 @@ equation
 This is where the activation function becomes very important. What
 the activation function does is introduce some kind of nonlinearity to the
 output. There are actually many different kinds of activation functions,
-but the most common (and the most simple) being ReLu:
+but the most common being ReLu. ReLu is often favored over other activation functions because of its simplicity, while still being very powerfull.
+
 
 
 figure
@@ -216,9 +201,7 @@ Implementing the ReLu function would look like this:
 code
 
 
-
 Another kind of activiation function is the Sigmoid:
-
 
 
 
@@ -230,7 +213,7 @@ An implemented version of the sigmoid looks like this:
 
 
 
-We will add ReLu activation to our hidden layer, and
+We will add ReLu activation to our hidden layers, and
 Sigmoid to our output layer. This is how our final model
 will look like:
 
@@ -240,15 +223,22 @@ Equation
 
 
 
-Adding ReLu and the Sigmoid activation to the example above, we now
-get ....
+We use the Sigmoid as the activation in our final layer because it
+forces the output to be in the 0 - 1 range, and so the output can be
+interpreted as a probability of each class. An output close to 0
+means our neural network predicted the shrub to be the Hazel Shrub
+and an output close to 1 means our network predicted
+the Alder Buckthorn Shrub.
+
+Now that we have our neural network architecture complete, we can
+do a full example run through our neural network, using some dummy
+values.
+
 
 
 Picture
 
 
-
-equation 4
 
 
 
@@ -263,7 +253,7 @@ We know that the first
 row in our dataset should be 1 (Hazel Shrub) from looking
 at our labeled datset and not .....
 This is no problem, because the whole goal of training the
-Neural Network now is to calculate the difference between
+neural network now is to calculate the difference between
 this output, and the actual expected output,
 and updating the weights using this information. To calculate
 the difference between the actual and expected output we use
