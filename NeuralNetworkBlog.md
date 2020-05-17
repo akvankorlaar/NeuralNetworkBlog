@@ -1,7 +1,7 @@
 # Understanding neural networks using real examples
 
 A neural network is a computer algorithm inspired
-by the human brain (hence Neural), composed of a
+by the human brain, composed of a
 network of artificial neurons. This network of
 aritificial neurons is able to learn patterns from
 example data, and is able to use this learned knowledge to
@@ -23,11 +23,12 @@ areas. With this technology becoming ever more
 usefull and adopted with each year, it is very much worth your
 time to learn how this technology works.
 
-In this example we will attempt to learn a neural
-network how to classify different types of shrubs based
-on shrub height and the shrub's leave size.
-We will go through the process of
+In this example we will learn how a neural network
+works by building a neural network that is able to classify
+different types of shrubs based on their height and leave
+size. We will go through the process of
 preprocessing data, defining a neural network architecture,
+building a neural network,
 and finally training the neural network using our preprocessed
 data. Some familiarity with Python 3, Pandas and Keras
 will help. 
@@ -85,13 +86,13 @@ Fig1: Picture of the dataset
 
 
 So our dataset has 100 rows, containing Leave size and shrub
-height of two different shrub species. The task of the Neural Network
+height of two different shrub species. The task of the neural network
 will be to, given some shrubs leave size, and some shrubs height,
 to predict the shrub species. In this example the leave size and shrub height are called the input features, and will be the neural networks input. The shrub species is called the class, and will be the neural networks output.
 
 Note that for all these examples we already know the shrub species. The
-reason for this is that our network first needs to learn how to use
-leave size and height to distinguish between different shrub species.
+reason for this is that our network first needs to learn how different
+leave sizes and different shrub heights can lead to different shrub species.
 Data in which you already know the class you want to predict is also
 called labeled data. It is commonly hard to get alot of labeled data,
 because it often involes alot of manual work to create .
@@ -103,9 +104,7 @@ can only convert numbers to numbers, so we will assign the number
 the Alder Buckthorn Shrub'.
 
 For the input features, note that Leave size is in centimeters,
-and shrub height in meters. We will convert all these input values
-to 0 - 1 range. One of the reasons to do this is to prevent a large feature (such as
-the shrub height in this case) has a disproportionate effect
+and shrub height in meters. Another thing we will do is convert all these input values to 0 - 1 range. One of the reasons to do this is to prevent a large feature (such as the shrub height in this case) has a disproportionate effect
 on the training. Here is the full preprocessing code:
 
 ```python
@@ -131,7 +130,7 @@ preprocessed_df.insert(2, 'Shrub species name', class_column)
 preprocessed_df.to_csv('preprocessed_shrub_dataset.csv')
 ```
 
-Neural Network Architecture
+# Neural Network Architecture
 
 In this example we will be looking at a type
 of neural network called a 'Feedforward neural network'.
@@ -141,16 +140,24 @@ data comes in at the input, and goes out at the output.
 The most fundamental block of a neural network is the artificial
 neuron. The artificial neuron is a unit that takes input,
 does some mathematical transformation, and produces output.
-The mathematical transformation most commonly consists of multiplying some
-value by a weight value, and adding some bias. For example:
+The mathematical transformation most commonly consists of multiplying the
+input value by a weight value, and adding some bias. For example:
 
 equation
 
 
 
-These neurons are organised in layers. We will have 2 neurons
-in the input layer, a second layer with 3 neurons, a third
-layer with 3 neurons, and a final layer with 1 neuron.
+The weight and the bias are the learnable parameters of the
+neural network. What this means is that these values change
+when the network is learning. Without them our neural network
+would not be able to learn anything. When training, the values
+of the weights and the bias are adjusted slightly every iteration,
+in an attempt to find their optimal values. How this happens
+will be discussed later on.
+
+The artificial neurons are organised in layers. We will have 2 
+artificial neurons in the input layer, a second layer with
+3 artificla neurons, a third layer with 3 artificial neurons, and a final layer with 1 artificial neuron.
 From layer to layer, every neuron is connected using weights.
 For example, this means that with 2 neurons in the input layer
 and 3 neurons in the second layer we will have (2 x 3 )
@@ -174,9 +181,8 @@ equation
 
 
 There is still an important ingredient missing from our neural network:
-Activation functions. Suppose all that happened with the data from
-input to output was multiplication with some weights, and addition
-of some bias. That means that at its best
+Activation functions. Suppose all that happened in a neural network
+with the data from input to output was multiplication with some weights, and addition of some bias. That means that at its best
 the neural network would be able to learn a linear function. In other words
  the output of the neural network would always be:
 
@@ -185,7 +191,7 @@ equation
 
 This is where the activation function becomes very important. What
 the activation function does is introduce some kind of nonlinearity to the
-output. There are actually many different kinds of activation functions,
+output. There are many different kinds of activation functions,
 but the most common being ReLu. ReLu is often favored over other activation functions because of its simplicity, while still being very powerfull.
 
 
@@ -224,13 +230,14 @@ Equation
 
 
 We use the Sigmoid as the activation in our final layer because it
-forces the output to be in the 0 - 1 range, and so the output can be
-interpreted as a probability of each class. An output close to 0
+forces the output to be in the 0 - 1 range, and given that
+we only have 2 output classes, the output can be
+interpreted as a probability of each class: An output close to 0
 means our neural network predicted the shrub to be the Hazel Shrub
-and an output close to 1 means our network predicted
-the Alder Buckthorn Shrub.
+and an output close to 1 means our network predicted the shrub to
+be the the Alder Buckthorn Shrub.
 
-Now that we have our neural network architecture complete, we can
+Now that we have completed our neural network architecture, we can
 do a full example run through our neural network, using some dummy
 values.
 
@@ -249,15 +256,21 @@ Picture
 
 
 
-We know that the first
-row in our dataset should be 1 (Hazel Shrub) from looking
-at our labeled datset and not .....
-This is no problem, because the whole goal of training the
-neural network now is to calculate the difference between
-this output, and the actual expected output,
-and updating the weights using this information. To calculate
-the difference between the actual and expected output we use
-the ... .... .. With the following formula:
+The output here does not make much sense yet. This is because the bias
+and the weight values were random. The input values used were actually
+the first row of our dataset. As you can see the output here should
+have been 0, not ... . So it seems our weight and bias values still
+need some adjusting. But how should we do this?
+
+# Cost function
+
+The first thing we need when adjusting the weights and the bias values
+of our neural network is an algorithm that estimates how wrong
+our network is. If we want to update the networks bias and weights,
+we need to know how far we are off. This is why we need a cost function.
+
+# Backpropagation
+
 
 
 
