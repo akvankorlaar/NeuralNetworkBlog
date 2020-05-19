@@ -20,8 +20,8 @@ because well, computers couldn't do much. With the
 enormous rise of computing power however, neural
 networks have proven to be invaluable in many many
 areas. With this technology becoming ever more
-usefull and adopted with each year, it is very much worth your
-time to learn how this technology works.
+usefull with each year, so does knowledge
+on how to build and improve neural networks.
 
 In this example we will learn how a neural network
 works by building a neural network that is able to classify
@@ -82,9 +82,6 @@ array(['Hazel Shrub', 'Alder Buckthorn Shrub'],
 """
 ```
 
-Fig1: Picture of the dataset
-
-
 So our dataset has 100 rows, containing Leave size and shrub
 height of two different shrub species. The task of the neural network
 will be to, given some shrubs leave size, and some shrubs height,
@@ -143,11 +140,9 @@ does some mathematical transformation, and produces output.
 The mathematical transformation most commonly consists of multiplying the
 input value by a weight value, and adding some bias. For example:
 
-equation
+![equation2](equation2.gif) 
 
-
-
-The weight and the bias are the learnable parameters of the
+With $w$ a weight value, and $b$ a bias value. The weight and the bias are the learnable parameters of the
 neural network. What this means is that these values change
 when the network is learning. Without them our neural network
 would not be able to learn anything. When training, the values
@@ -155,14 +150,22 @@ of the weights and the bias are adjusted slightly every iteration,
 in an attempt to find their optimal values. How this happens
 will be discussed later on.
 
-The artificial neurons are organised in layers. We will have 2 
-artificial neurons in the input layer, a second layer with
-3 artificla neurons, a third layer with 3 artificial neurons, and a final layer with 1 artificial neuron.
+The artificial neurons are organised in layers. We will have 3
+artificial neurons in the first layer, a second layer with
+3 artificial neurons and a final layer with 1 artificial neuron.
+The input is a vector with 2 values: shrub height and leave size.
+Sometimes the input is counted as a separate layer, but because
+the input is given to the network unmodified, we will not
+choose to do so.
+
 From layer to layer, every neuron is connected using weights.
-For example, this means that with 2 neurons in the input layer
-and 3 neurons in the second layer we will have (2 x 3 )
-6 weights in between. The following is a graphical representation
-of our Neural Network right now: 
+For example, this means that with 2 input values
+and 3 neurons in the first layer we will have (2 x 3 )
+6 weights in between. From the first to the second layer,
+we will have 9 weights (3 * 3), and from the second to the third
+layer we will have 3 weights (3 * 1). 
+The following is a graphical representation
+of our neural network right now: 
 
 
 Picture
@@ -172,12 +175,15 @@ Picture
  The following is an
 equavalent mathematical representation of the entire neural network: 
 
+![equation3](equation3.gif) 
 
-equation
+![equation4](equation4.gif) 
 
+![equation5](equation5.gif) 
 
+Which when chained together forms:
 
-
+in which %W% are the weight matrixes in the different, %c% is the bias vector
 
 
 There is still an important ingredient missing from our neural network:
@@ -231,7 +237,7 @@ Equation
 
 We use the Sigmoid as the activation in our final layer because it
 forces the output to be in the 0 - 1 range, and given that
-we only have 2 output classes, the output can be
+we only have 2 output classes, this way the output can be
 interpreted as a probability of each class: An output close to 0
 means our neural network predicted the shrub to be the Hazel Shrub
 and an output close to 1 means our network predicted the shrub to
