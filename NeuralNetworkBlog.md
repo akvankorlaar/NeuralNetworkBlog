@@ -44,6 +44,8 @@ So at the input data we start!
 For this example I generated a dataset
 that is located at 
 
+link
+
 First we take a look at the data to see what we have:
 
 ```python
@@ -85,14 +87,16 @@ array(['Hazel Shrub', 'Alder Buckthorn Shrub'],
 So our dataset has 100 rows, containing Leave size and shrub
 height of two different shrub species. The task of the neural network
 will be to, given some shrubs leave size, and some shrubs height,
-to predict the shrub species. In this example the leave size and shrub height are called the input features, and will be the neural networks input. The shrub species is called the class, and will be the neural networks output.
+to predict the shrub species. In this example the leave size and shrub height are called the input features, and will be the neural networks input. The shrub species is called the target class, and will be the neural networks output.
 
-Note that for all these examples we already know the shrub species. The
-reason for this is that our network first needs to learn how different
+Note that for all these examples we already know the shrub species. Our
+goal was to make our neural network predict exactly this, so why do we look
+at data where we already know the answer?
+The reason for this is that our network first needs to learn how different
 leave sizes and different shrub heights can lead to different shrub species.
-Data in which you already know the class you want to predict is also
-called labeled data. It is commonly hard to get alot of labeled data,
-because it often involes alot of manual work to create .
+Data in which you already know the class you want to predict is
+called **labeled data**. It is commonly hard to get alot of labeled data,
+because it often involes alot of manual work to create. 
 
 Before we can use this to train our network however, there
 is some preprocessing we need to do. In itself the network
@@ -101,7 +105,7 @@ can only convert numbers to numbers, so we will assign the number
 the Alder Buckthorn Shrub'.
 
 For the input features, note that Leave size is in centimeters,
-and shrub height in meters. Another thing we will do is convert all these input values to 0 - 1 range. One of the reasons to do this is to prevent a large feature (such as the shrub height in this case) has a disproportionate effect
+and shrub height in meters. Another thing we will do is convert all these input values to 0 - 1 range. One of the reasons to do this is to prevent that a large feature (such as the shrub height in this case) has a disproportionate effect
 on the training. Here is the full preprocessing code:
 
 ```python
@@ -130,12 +134,12 @@ preprocessed_df.to_csv('preprocessed_shrub_dataset.csv')
 # Neural Network Architecture
 
 In this example we will be looking at a type
-of neural network called a 'Feedforward neural network'.
+of neural network called a **feedforward neural network**.
 In Feedforward neural network the data flow is unidirectional:
 data comes in at the input, and goes out at the output.
 
-The most fundamental block of a neural network is the artificial
-neuron. The artificial neuron is a unit that takes input,
+The most fundamental block of a neural network is the **artificial
+neuron**. The artificial neuron is a unit that takes input,
 does some mathematical transformation, and produces output.
 The mathematical transformation most commonly consists of multiplying the
 input value by a weight value, and adding some bias. For example:
@@ -148,31 +152,40 @@ when the network is learning. Without them our neural network
 would not be able to learn anything. When training, the values
 of the weights and the bias are adjusted slightly every iteration,
 in an attempt to find their optimal values. How this happens
-will be discussed later on.
+will be discussed later on. Usually before training the weight
+values are initialised at small random values, and the bias value
+is initialised at 0.
 
-The artificial neurons are organised in layers. We will have 3
-artificial neurons in the first layer, a second layer with
-3 artificial neurons and a final layer with 1 artificial neuron.
-The input is a vector with 2 values: shrub height and leave size.
-Sometimes the input is counted as a separate layer, but because
-the input is given to the network unmodified, we will not
-choose to do so.
+The artificial neurons are organised in layers. We will have
+the input layer, 3 artificial neurons in the first hidden layer, a second hidden layer with 3 artificial neurons and a final layer with 1 artificial neuron.
+The depth of the neural network is the number of layers.
+The first layer just represents the input
+data unmodified, as it is, without any weight and bias multiplication.
+Because of this a convention that we will use here is that the input
+layer it not counted when calculating the depth of the neural network. So
+this means that in our case the depth of the neural network is 3.
+
+For our final layer we know what we want as the output: either a 0 or a 1
+indicating which shrub we want. For our hidden layers there is no direct
+specification of which output we want. The neural network will have to learn
+the desired output for these itself. The output of the hidden layers is also not directly visible. This is why hidden layers are called hidden layers.
 
 From layer to layer, every neuron is connected using weights.
-For example, this means that with 2 input values
-and 3 neurons in the first layer we will have (2 x 3 )
-6 weights in between. From the first to the second layer,
-we will have 9 weights (3 * 3), and from the second to the third
-layer we will have 3 weights (3 * 1). 
+This means that with 2 input values
+and 3 neurons in the first hidden layer we will have (2 x 3 )
+6 weights in between. From the first hidden layer
+to the second hidden layer,
+we will have 9 weights (3 * 3), and from the second hidden
+layer to the final layer we will have 3 weights (3 * 1). 
 The following is a graphical representation
-of our neural network right now: 
+of our neural network: 
 
 
 Picture
 
 
 
- The following is an
+The following is an
 equavalent mathematical representation of the entire neural network: 
 
 ![equation3](equation3.gif) 
@@ -184,7 +197,6 @@ equavalent mathematical representation of the entire neural network:
 Which when chained together forms:
 
 in which %W% are the weight matrixes in the different, %c% is the bias vector
-
 
 There is still an important ingredient missing from our neural network:
 Activation functions. Suppose all that happened in a neural network
