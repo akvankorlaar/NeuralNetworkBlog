@@ -52,5 +52,7 @@ preprocessed_df=(df2-df2.min())/(df2.max()-df2.min())
 # Insert the class column again
 preprocessed_df.insert(2, 'Shrub species name', class_column)
 
+preprocessed_df.columns=['leave_size', 'shrub_height', 'shrub_species']
+
 # Write the preprocessed df to a csv
 preprocessed_df.to_csv('preprocessed_shrub_dataset.csv')

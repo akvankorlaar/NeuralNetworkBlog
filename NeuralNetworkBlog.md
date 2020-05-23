@@ -87,7 +87,8 @@ array(['Hazel Shrub', 'Alder Buckthorn Shrub'],
 So our dataset has 100 rows, containing Leave size and shrub
 height of two different shrub species. The task of the neural network
 will be to, given some shrubs leave size, and some shrubs height,
-to predict the shrub species. In this example the leave size and shrub height are called the input features, and will be the neural networks input. The shrub species is called the target class, and will be the neural networks output.
+to predict the shrub species. In this example the leave size and shrub height are called the input features, and will be the neural networks input. The shrub species is called the target class, and will be the neural networks output. In
+our example we will have 2 classes: Hazel Shrub and Alder Buckthorn Shrub.
 
 Note that for all these examples we already know the shrub species. Our
 goal was to make our neural network predict exactly this, so why do we look
@@ -98,7 +99,7 @@ Data in which you already know the class you want to predict is
 called **labeled data**. It is commonly hard to get alot of labeled data,
 because it often involes alot of manual work to create. 
 
-Before we can use this to train our network however, there
+Before we can use this data to train our network however, there
 is some preprocessing we need to do. In itself the network
 can only convert numbers to numbers, so we will assign the number 
 '0' to the Hazel Shrub and the number '1' to
@@ -131,6 +132,12 @@ preprocessed_df.insert(2, 'Shrub species name', class_column)
 preprocessed_df.to_csv('preprocessed_shrub_dataset.csv')
 ```
 
+The following is a visualisation of our preprocessed dataset:
+
+![preprocessed_shrub_dataset_plot.jpg](preprocessed_shrub_dataset_plot.jpg) 
+Figure 1: Visualisation of reprocessed shrub dataset, with Hazel Shrub (0) in
+blue, and Alder Buckthorn Shrub (1) in orange. 
+
 # Neural Network Architecture
 
 In this example we will be looking at a type
@@ -146,10 +153,8 @@ input value by a weight value, and adding some bias. For example:
 
 ![equation2](equation2.gif) 
 
-With $w$ a weight value, and $b$ a bias value. The weight and the bias are the learnable parameters of the
-neural network. What this means is that these values change
-when the network is learning. Without them our neural network
-would not be able to learn anything. When training, the values
+With $w$ a weight value, and $b$ a bias value. The weight and the bias are the learnable parameters of the neural network. Without them our neural network
+would not be able to learn anything. Recall that we want to classify different types of shrub species based on their leaf size and shrub height. The goal when training a neural network is to create a model that is most likely able to explain the observed data, using these learnable parameters of the neural network. When training, the values
 of the weights and the bias are adjusted slightly every iteration,
 in an attempt to find their optimal values. How this happens
 will be discussed later on. Usually before training the weight
@@ -157,20 +162,8 @@ values are initialised at small random values, and the bias value
 is initialised at 0.
 
 The artificial neurons are organised in layers. We will have
-the input layer, 3 artificial neurons in the first hidden layer, a second hidden layer with 3 artificial neurons and a final layer with 1 artificial neuron.
-The depth of the neural network is the number of layers.
-The first layer just represents the input
-data unmodified, as it is, without any weight and bias multiplication.
-Because of this a convention that we will use here is that the input
-layer it not counted when calculating the depth of the neural network. So
-this means that in our case the depth of the neural network is 3.
-
-For our final layer we know what we want as the output: either a 0 or a 1
-indicating which shrub we want. For our hidden layers there is no direct
-specification of which output we want. The neural network will have to learn
-the desired output for these itself. The output of the hidden layers is also not directly visible. This is why hidden layers are called hidden layers.
-
-From layer to layer, every neuron is connected using weights.
+the input layer, 3 artificial neurons in the second layer, a third layer with 3 artificial neurons and a final layer with 1 artificial neuron.
+From layer to layer, every artificial neuron is connected using weights.
 This means that with 2 input values
 and 3 neurons in the first hidden layer we will have (2 x 3 )
 6 weights in between. From the first hidden layer
@@ -197,6 +190,13 @@ equavalent mathematical representation of the entire neural network:
 Which when chained together forms:
 
 in which %W% are the weight matrixes in the different, %c% is the bias vector
+
+The depth of the neural network is the number of layers.
+The input layer just represents the input
+data unmodified, as it is, without any weight and bias multiplication.
+Because of this a convention that we will use here is that the input
+layer it not counted when calculating the depth of the neural network. So
+this means that in our case the depth of the neural network is 3.
 
 There is still an important ingredient missing from our neural network:
 Activation functions. Suppose all that happened in a neural network
