@@ -1,4 +1,4 @@
-# Understanding neural networks using real examples
+# Neural Network Basics with Python, Pandas and Keras
 
 A neural network is a computer algorithm composed of a
 network of artificial neurons. This network of
@@ -41,9 +41,9 @@ but one rule always stays the same: **Garbage in = Garbage out**.
 So at the input data we start! 
 
 For this example I generated a dataset
-that is located at 
+that is located at:
 
-link
+https://github.com/akvankorlaar/NeuralNetworkBlog/blob/master/shrub_dataset.csv
 
 First we take a look at the data to see what we have:
 
@@ -156,7 +156,7 @@ input value by a weight value, and adding some bias. For example:
 
 ![equation2](equation2.gif) 
 
-With $w$ a weight value, and $b$ a bias value. The **weight** and the **bias** are the learnable **parameters** of the neural network. Without them our neural network would not be able to learn anything. Recall that we want to classify different types of shrub species based on their leaf size and shrub height. The goal when training a neural network is to create a model that is most likely able to explain the observed data, using these learnable parameters of the neural network. When training, the values
+Where w is a **weight** value, and b is a **bias** value. The weights and the bias are the learnable **parameters** of the neural network. Without them our neural network would not be able to learn anything. Recall that we want to classify different types of shrub species based on their leaf size and shrub height. The goal when training a neural network is to create a model that is most likely able to explain the observed data, using these learnable parameters of the neural network. When training, the values
 of the weights and the bias are adjusted slightly every iteration,
 in an attempt to find their optimal values. How this happens
 will be discussed later on. Usually before training the weight
@@ -176,15 +176,14 @@ to the third layer, we will have 9 weights (3 * 3), and from the third layer to 
 the number of neurons, so that means in total our neural network will have 25 parameters (6 + 9 + 3 + 7).
 
 The following is a graphical representation
-of our neural network: 
+of our neural network (excluding the bias vectors): 
+
+![NeuralNetworkPicture](NeuralNetworkPicture.png) 
+
+ Fig1. Picture generated with help of http://alexlenail.me/NN-SVG/index.html
 
 
-Picture
-
-
-
-The following is an
-equavalent mathematical representation of the entire neural network: 
+The following is a mathematical representation of the neural network: 
 
 ![equation3](equation3.gif) 
 
@@ -275,7 +274,6 @@ Picture
 
 
  
- Fig1. Picture generated with help of http://alexlenail.me/NN-SVG/index.html
 
 
 
@@ -292,25 +290,3 @@ The first thing we need when adjusting the weights and the bias values
 of our neural network is an algorithm that estimates how wrong
 our network is. If we want to update the networks bias and weights,
 we need to know how far we are off. This is why we need a cost function.
-
-# Backpropagation
-
-
-
-
-
-Fig2. Picture generated with help of http://alexlenail.me/NN-SVG/index.html
-
-
-
-So in our case this would be
-
-
-Fig3
-
-
-
-
-Now that we have this number
-
-
