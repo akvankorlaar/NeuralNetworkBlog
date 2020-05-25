@@ -185,17 +185,9 @@ of our neural network (excluding the bias vectors):
 
 The following is a mathematical representation of the neural network: 
 
-![equation3](equation3.gif) 
+![equations1](equations1.gif) 
 
-![equation4](equation4.gif) 
-
-![equation5](equation5.gif) 
-
-Which when chained together forms:
-
-in which %W% are the weight matrixes in the different, %c% is the bias vector
-
-As you can see, because we have multiple input values, the input is an
+In which x is the input vector, W are the weight matrixes for the different layers and c are the bias vectors for the different layers. Because we have multiple input values, the input is an
 [2x1] vector: the leave size and the shrub height. The weights in
 between are aranged as matrixes. For example, the 6 weights in the between the
 input layer and the second layer are arranged as a [3x2] matrix (3 neurons, 2 input values), and the bias here is a bias [3x1] bias vector (3 neurons).
@@ -290,3 +282,5 @@ The first thing we need when adjusting the weights and the bias values
 of our neural network is an algorithm that estimates how wrong
 our network is. If we want to update the networks bias and weights,
 we need to know how far we are off. This is why we need a cost function.
+
+<a href="http://www.codecogs.com" target="_blank"><img src="http://www.codecogs.com/images/poweredbycodecogs.png" border="0" title="CodeCogs - An Open Source Scientific Library" alt="CodeCogs - An Open Source Scientific Library"></a>
