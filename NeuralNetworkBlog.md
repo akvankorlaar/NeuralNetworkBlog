@@ -173,14 +173,13 @@ will be discussed later on. Usually before training the weight
 values are initialised at small random values, and the bias values
 are initialised at 0.
  
-The artificial neurons are organised in layers. We will have
-the input layer, 3 artificial neurons in the first hidden layer, 3 artificial neurons in the second hidden layer and a final layer with 1 artificial neuron.
-As you can see, any layer that is not the input layer or the output layer is called a 'Hidden' layer. Things such
-as the number of layers and the number of artificial neurons in each layer
-that define the architecture of a neural network are called **hyperparameters**.
+The artificial neurons are organised in layers. We will have 3 types of layers:
+* The input layer. The input layer contains the input values without any weight or bias multiplication. In our case this is an input vector with 2 elements (shrub height and leave size).
+* The output layer. The output layer is the final layer of our neural network, and outputs the predicted value.
+* A hidden layer. Any layer that is not the input layer or the output layer is called a hidden layer. Their outputs are not directly observable.
 
-From layer to layer, every artificial neuron is connected using weights.
-This means that with 2 input values
+We can chain these layers together. The number of hidden layers and the number of neurons in each layer is for us to decide. For this example, we will have the input layer, 3 artificial neurons in a first hidden layer, 3 artificial neurons in a second hidden layer and finally the output layer with 1 artificial neuron. From layer to layer, every artificial neuron is connected using weights.
+This means that with 2 input elements
 and 3 neurons in the first hidden layer we will have (2 x 3 )
 6 weights in between. From the first hidden layer to the second hidden layer, we will have 9 weights (3 * 3), and from the second hidden layer to the final layer we will have 3 weights (3 * 1). The number of bias units equals
 the number of neurons, so that means in total our neural network will have 25 parameters (6 + 9 + 3 + 7).
