@@ -29,8 +29,18 @@ size. We will go through the process of
 preprocessing data, defining a neural network architecture,
 building a neural network,
 and finally training the neural network using our preprocessed
-data. Some familiarity with Python 3, Pandas and Keras
-will help. 
+data. Some familiarity with Python 3, Pandas and linear algebra
+will help.
+
+Tutorials on Python and Pandas:
+* https://realpython.com/pandas-dataframe/
+* https://realpython.com
+* https://docs.python.org/3/tutorial/
+
+Tutorials on linear algebra:
+* https://www.khanacademy.org/math/linear-algebra
+* https://www.mathsisfun.com/algebra/matrix-introduction.html
+* https://www.mathsisfun.com/algebra/matrix-multiplying.html
 
 ## Input Data
 
@@ -199,25 +209,23 @@ an **activation function**. Suppose all that happened in a neural network
 with the data from input to output was multiplication of the input vector
 with some weight matrixes, and addition of bias some vectors. In this way, the neural network would only be able to learn a linear function.
 
-equation
-
-
 This is where the activation function becomes very important. What
 the activation function does is introduce some kind of nonlinearity to the
 output. There are many different kinds of activation functions,
-but the most common being ReLu. ReLu is often favored over other activation functions because of its simplicity, while still being very powerfull.
+but the most common being the Rectified Linear Unit (ReLu). ReLu is currently
+very popular for usage in the hidden layers because of its simplicity, while still being very powerfull. ReLu is easily implemented, and also easily differientable. Why this last point is important will
+be discussed later on. The following is an implementation of ReLu:
 
+```python
+def ReLu(input):
+    if input < 0:
+        return 0
+    else:
+        return input
+```
 
-figure
-
-
-
-Implementing the ReLu function would look like this:
-
-
-
-code
-
+So ReLu always outputs 0 when the input is negative, otherwise it outputs the
+unaltered input. We will use ReLu for the first hidden layer, and the second hidden layer.
 
 Another kind of activiation function is the Sigmoid:
 
