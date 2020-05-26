@@ -164,15 +164,15 @@ values are initialised at small random values, and the bias values
 are initialised at 0.
  
 The artificial neurons are organised in layers. We will have
-the input layer, 3 artificial neurons in the second layer, a third layer with 3 artificial neurons and a final layer with 1 artificial neuron. Things such
+the input layer, 3 artificial neurons in the first hidden layer, 3 artificial neurons in the second hidden layer and a final layer with 1 artificial neuron.
+As you can see, any layer that is not the input layer or the output layer is called a 'Hidden' layer. Things such
 as the number of layers and the number of artificial neurons in each layer
 that define the architecture of a neural network are called **hyperparameters**.
 
 From layer to layer, every artificial neuron is connected using weights.
 This means that with 2 input values
-and 3 neurons in the second layer we will have (2 x 3 )
-6 weights in between. From the second layer
-to the third layer, we will have 9 weights (3 * 3), and from the third layer to the final layer we will have 3 weights (3 * 1). The number of bias umnits equals
+and 3 neurons in the first hidden layer we will have (2 x 3 )
+6 weights in between. From the first hidden layer to the second hidden layer, we will have 9 weights (3 * 3), and from the second hidden layer to the final layer we will have 3 weights (3 * 1). The number of bias units equals
 the number of neurons, so that means in total our neural network will have 25 parameters (6 + 9 + 3 + 7).
 
 The following is a graphical representation
@@ -187,19 +187,17 @@ The following is a mathematical representation of the neural network:
 
 ![equations1](equations1.gif) 
 
-In which x is the input vector, W are the weight matrixes for the different layers and c are the bias vectors for the different layers. Because we have multiple input values, the input is an
-[2x1] vector: the leave size and the shrub height. The weights in
+Because we have multiple input values, the input is a vector with 2 elements: the leave size and the shrub height. The weights in
 between are aranged as matrixes. For example, the 6 weights in the between the
-input layer and the second layer are arranged as a [3x2] matrix (3 neurons, 2 input values), and the bias here is a bias [3x1] bias vector (3 neurons).
+input layer and the first hidden layer are arranged as a [2x3] matrix (2 input values, 3 neurons in the first hidden layer), and the bias here is a bias vector with 3 elements (because we have 3 neurons in the first hidden layer).
 
 The **depth** of the neural network is the number of layers of the neural
 network. In our case the depth of the neural network is 3. This is because the input layer just represents the input data unmodified, as it is, without any weight and bias multiplication, and so it is commonly not counted when calculating the neural networks depth.
 
 There is still an important ingredient missing from our neural network:
-an **Activation function**. Suppose all that happened in a neural network
-with the data from input to output was multiplication with some weights, and addition of some bias. That means that at its best
-the neural network would be able to learn a linear function. In other words
- the output of the neural network would always be:
+an **activation function**. Suppose all that happened in a neural network
+with the data from input to output was multiplication of the input vector
+with some weight matrixes, and addition of bias some vectors. In this way, the neural network would only be able to learn a linear function.
 
 equation
 
@@ -210,7 +208,6 @@ output. There are many different kinds of activation functions,
 but the most common being ReLu. ReLu is often favored over other activation functions because of its simplicity, while still being very powerfull.
 
 
-þ
 figure
 
 
