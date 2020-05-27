@@ -240,22 +240,14 @@ With the activation functions added, our model now looks like this:
 
 ![neural_network_architecture_equations2](neural_network_architecture_equations2.gif) 
 
-
 Now that we have completed our neural network architecture, we can
-do a full example run through our neural network. For the input values,
-we will use the first row of our preprocessed dataset.
+do a full example run through our neural network. Some knowledge on matrix
+multiplication will be helpfull here. Take a look at for example: https://www.mathsisfun.com/algebra/matrix-multiplying.html 
 
+For the input values, we will use the first row of our preprocessed dataset. The values (rounded to 3 decimals) for the leave size here and the shrub height here are 0.337 and 0.401. 
 
 
 Picture
-
-
-
-
-
-
- 
-
 
 
 
