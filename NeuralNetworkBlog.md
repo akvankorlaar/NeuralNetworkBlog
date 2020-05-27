@@ -174,9 +174,9 @@ values are initialised at small random values, and the bias values
 are initialised at 0.
  
 The artificial neurons are organised in layers. We will have 3 types of layers:
-* The input layer. The input layer contains the input values without any weight or bias multiplication. In our case this is an input vector with 2 elements (shrub height and leave size).
-* The output layer. The output layer is the final layer of our neural network, and outputs the predicted value.
-* A hidden layer. Any layer that is not the input layer or the output layer is called a hidden layer. Their outputs are not directly observable.
+* The **input layer**. The input layer contains the input values without any weight or bias multiplication. In our case this is an input vector with 2 elements (shrub height and leave size).
+* The **output layer**. The output layer is the final layer of our neural network, and outputs the predicted value.
+* A **hidden layer**. Any layer that is not the input layer or the output layer is called a hidden layer. Their outputs are not directly observable.
 
 We can chain these layers together. The number of hidden layers and the number of neurons in each layer is for us to decide. For this example, we will have the input layer, 3 artificial neurons in a first hidden layer, 3 artificial neurons in a second hidden layer and finally the output layer with 1 artificial neuron. From layer to layer, every artificial neuron is connected using weights.
 This means that with 2 input elements
@@ -196,8 +196,7 @@ The following is a mathematical representation of the neural network:
 
 ![equations1](equations1.gif) 
 
-Because we have multiple input values, the input is a vector with 2 elements: the leave size and the shrub height. The weights in
-between are aranged as matrixes. For example, the 6 weights in the between the
+With multiple neurons connected through multiple layers, the weights are aranged as matrixes. For example, the 6 weights in the between the
 input layer and the first hidden layer are arranged as a [2x3] matrix (2 input values, 3 neurons in the first hidden layer), and the bias here is a bias vector with 3 elements (because we have 3 neurons in the first hidden layer).
 
 The **depth** of the neural network is the number of layers of the neural
@@ -211,54 +210,40 @@ with some weight matrixes, and addition of bias some vectors. In this way, the n
 This is where the activation function becomes very important. What
 the activation function does is introduce some kind of nonlinearity to the
 output. There are many different kinds of activation functions,
-but the most common being the Rectified Linear Unit (ReLu). ReLu is currently
-very popular for usage in the hidden layers because of its simplicity, while still being very powerfull. ReLu is easily implemented, and also easily differientable. Why this last point is important will
-be discussed later on. The following is an implementation of ReLu:
+but the most common being the Rectified Linear Unit (**ReLU**). ReLU is currently
+very popular for usage in the hidden layers because of its simplicity, while still being very powerfull. ReLU is easily implemented, and also easily differientable. Why this last point is important will
+be discussed later on. ReLU is defined as:
+
+![relu_equation](relu_equation.gif) 
+
+The following is an implementation of ReLU:
 
 ```python
-def ReLu(input):
+def ReLU(input):
     if input < 0:
         return 0
     else:
         return input
 ```
 
-So ReLu always outputs 0 when the input is negative, otherwise it outputs the
-unaltered input. We will use ReLu for the first hidden layer, and the second hidden layer.
+So ReLU always outputs 0 when the input is negative, otherwise it outputs the
+unaltered input. We will use ReLU for the first hidden layer, and the second hidden layer.
 
-Another kind of activiation function is the Sigmoid:
+For our output layer we will use the **sigmoid** activation function. 
+The output of the sigmoid activation function stays within the 0-1
+range. This is handy, because we can then assume that if the output is > 0.5, the neural network classified the input as a Hazel Shrub. Otherwise the neural network has classified the input as an Alder Blackthorn Shrub. The sigmoid activation function satures when the arguments are large or small. This
+activation function is defined by:
 
+![sigmoid_equation](sigmoid_equation.gif) 
 
+With the activation functions added, our model now looks like this:
 
-picture
+![neural_network_architecture_equations2](neural_network_architecture_equations2.gif) 
 
-
-An implemented version of the sigmoid looks like this:
-
-
-
-
-We will add ReLu activation to our hidden layers, and
-Sigmoid to our output layer. This is how our final model
-will look like:
-
-
-Equation
-
-
-
-
-We use the Sigmoid as the activation in our final layer because it
-forces the output to be in the 0 - 1 range, and given that
-we only have 2 output classes, this way the output can be
-interpreted as a probability of each class: An output close to 0
-means our neural network predicted the shrub to be the Hazel Shrub
-and an output close to 1 means our network predicted the shrub to
-be the the Alder Buckthorn Shrub.
 
 Now that we have completed our neural network architecture, we can
-do a full example run through our neural network, using some dummy
-values.
+do a full example run through our neural network. For the input values,
+we will use the first row of our preprocessed dataset.
 
 
 
