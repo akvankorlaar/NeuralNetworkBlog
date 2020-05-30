@@ -1,9 +1,12 @@
-# Neural Network Basics with Python, Pandas and Keras
+# Deep Learning practical introduction using Python, Pandas and Keras
 
-A neural network is a computer algorithm composed of a
+A  **neural network** is a computer algorithm composed of a
 network of artificial neurons. This network of
 aritificial neurons is able to learn patterns from
 example data, and is able to use this learned knowledge to
+perform some task. These artificial neurons are organised in
+layers. **Deep learning** is a concept usually referred to when
+using a neural network with many layers to learn and
 perform some task.
 
 Despite their consistent
@@ -11,18 +14,18 @@ rise in popularity in recent years, neural networks have been
 around for quite a while: Frank Rosenblatt laid out
 the fundational building blocks for the neural network in
 1958. Thats over 60 years ago!
-
 Over the years neural networks were improved, forgotten,
 improved, and forgotten again. For years
 neural networks couldn't do much, 
-because well, computers couldn't do much. With the
-enormous rise of computing power however, neural
+because well, computers couldn't do much. In recent years however, with the
+help of the enormous rise of computing power, and the work of 
+some very clever computer scientists, neural
 networks have proven to be invaluable in many many
 areas. With this technology becoming ever more
 usefull with each year, so does knowledge
-on how to build and improve neural networks.
+on how to build and train neural networks.
 
-In this example we will learn how a neural network
+In this introduction we will learn how a neural network
 works by building a neural network that is able to classify
 different types of shrubs based on their height and leave
 size. We will go through the process of
@@ -48,9 +51,9 @@ The most important thing when working with neural networks
 is not its architecture: Its the data. Why? You can
 build most complex neural network,
 but one rule always stays the same: **Garbage in = Garbage out**.
-So at the input data we start! 
+So at the data we start! 
 
-For this example I generated a dataset
+For this example we will be using a generated dataset
 that is located at:
 
 https://github.com/akvankorlaar/NeuralNetworkBlog/blob/master/shrub_dataset.csv
@@ -95,9 +98,9 @@ array(['Hazel Shrub', 'Alder Buckthorn Shrub'],
 
 So our dataset has 100 rows, containing leave size and shrub
 height of two different shrub species. The task of the neural network
-will be to, given some shrubs leave size, and some shrubs height,
-to predict the shrub species. In this example the leave size and shrub height are the input features, and will be the neural networks input. The shrub species is the target class, and will be the neural networks output. In
-our example we will have 2 classes: Hazel Shrub and Alder Buckthorn Shrub.
+will be to, given some shrub leave size, and some shrub height,
+to predict the shrub species. In this example the leave size and shrub height are the input features, and will be the neural networks input. The shrub species is what the neural network has to predict, and will be the neural networks output. In
+our example we will have 2 target classes: Hazel Shrub and Alder Buckthorn Shrub.
 We only have 2 classes here so the task is called a **binary classifcation**, because our neural network needs to be able to predict
 one of these two classes given the input data.
 
@@ -175,17 +178,19 @@ are initialised at 0.
  
 The artificial neurons are organised in layers. We will have 3 types of layers:
 * The **input layer**. The input layer contains the input values without any weight or bias multiplication. In our case this is an input vector with 2 elements (shrub height and leave size).
-* The **output layer**. The output layer is the final layer of our neural network, and outputs the predicted value.
-* A **hidden layer**. Any layer that is not the input layer or the output layer is called a hidden layer. Their outputs are not directly observable.
+* The **output layer**. The output layer is the final layer of our neural network, and outputs the predicted value. In our case this will be a single scalar number in the 0 - 1
+range, indicating the predicted shrub species.
+* A **hidden layer**. Any layer that is not the input layer or the output layer is called a hidden layer. Their outputs are not directly observable. A hidden layer can contain any
+number of artificial neurons, and it is up to us to decide how many hidden layers there are, and how many artificial neurons they have.
 
 We can chain these layers together. The number of hidden layers and the number of neurons in each layer is for us to decide. For this example, we will have the input layer, 3 artificial neurons in a first hidden layer, 3 artificial neurons in a second hidden layer and finally the output layer with 1 artificial neuron. From layer to layer, every artificial neuron is connected using weights.
 This means that with 2 input elements
 and 3 neurons in the first hidden layer we will have (2 x 3 )
 6 weights in between. From the first hidden layer to the second hidden layer, we will have 9 weights (3 * 3), and from the second hidden layer to the final layer we will have 3 weights (3 * 1). The number of bias units equals
-the number of neurons, so that means in total our neural network will have 25 parameters (6 + 9 + 3 + 7).
+the number of neurons, so that means in total our neural network will have 25 parameters (6 weights + 9 weights + 3 weights + 7 bias units).
 
 The following is a graphical representation
-of our neural network (excluding the bias vectors): 
+of our neural network (excluding the bias units): 
 
 ![NeuralNetworkPicture](NeuralNetworkPicture.png) 
 
