@@ -5,21 +5,22 @@ network of artificial neurons. This network of
 aritificial neurons is able to learn patterns from
 example data, and is able to use this learned knowledge to
 perform some task. These artificial neurons are organised in
-layers. **Deep learning** is a concept usually referred to when
-using a neural network with many layers to learn and
+layers. **Deep learning** is a popularized concept usually
+referred to when using a neural network with many layers to learn and
 perform some task.
 
 Despite their consistent
-rise in popularity in recent years, neural networks have been
+rise in popularity in recent years, neural networks
+and their fundamentall building blocks have been
 around for quite a while: Frank Rosenblatt laid out
-the fundational building blocks for the neural network in
+some of the fundational building blocks for the neural network in
 1958. Thats over 60 years ago!
+
 Over the years neural networks were improved, forgotten,
 improved, and forgotten again. For years
 neural networks couldn't do much, 
-because well, computers couldn't do much. In recent years however, with the
-help of the enormous rise of computing power, and the work of 
-some very clever computer scientists, neural
+because, well, computers couldn't do much. In recent years however, with the
+help of the enormous rise of computing power neural
 networks have proven to be invaluable in many many
 areas. With this technology becoming ever more
 usefull with each year, so does knowledge
@@ -32,8 +33,8 @@ size. We will go through the process of
 preprocessing data, defining a neural network architecture,
 building a neural network,
 and finally training the neural network using our preprocessed
-data. Some familiarity with Python 3, Pandas and linear algebra
-will help.
+data. Some familiarity with Python 3, Pandas and linear algebra (vectors
+, matrices, etc.) will help.
 
 Tutorials on Python and Pandas:
 * https://realpython.com/pandas-dataframe/
