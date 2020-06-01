@@ -273,13 +273,20 @@ as input for the final layer:
 
 And as a last step apply the sigmoid activation function:
 
+![sigmoid_output](sigmoid_output.gif)
 
+So there we have it, we did a complete run from input to output (also
+called a **forward pass**) through our network. However, when we look
+at our table, we know that these input values we just used belong 
+to a Hazel Shrub, to which we assigned to number 0. Given that our predicted output is 0.65, and higher than 0.5, it means our network predicted the shrub
+to be the Alder Blackthorn Shrub, to which we assigned the number 1.
+So thats completely wrong!
 
-The output here does not make much sense yet. This is because the bias
-and the weight values were random. The input values used were actually
-the first row of our dataset. As you can see the output here should
-have been 0, not ... . So it seems our weight and bias values still
-need some adjusting. But how should we do this?
+Howevever this is no problem. We haven't actually trained our neural
+network yet, and all the bias and weight values are completely random.
+But how do you adjust all these parameters, so that they predict
+the right value?
+
 
 # Cost function
 
