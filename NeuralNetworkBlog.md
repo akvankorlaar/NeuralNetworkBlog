@@ -252,16 +252,24 @@ multiplication will be helpfull here. Take a look at for example: https://www.ma
 
 Let's start by calculating example results for hidden layer 1 by hand. For the input values, we will use the first row of our preprocessed dataset. The values (rounded to 2 decimals) for the leave size here and the shrub height here are 0.34 and 0.40. Because we do not have values for the weights and the bias, I will pick them here ourselves. As mentioned earlier, at the start of training the weights are commonly initialised as small random values, and the bias is 0. For now, for the weights I will pick random values between 0 and 2, and I will set all the bias values to -0.5. So:
 
-![hidden_layer_1_initialisation](hidden_layer_1_initialisation.gif) 
+![hidden_layer_1_init](hidden_layer_1_init.gif) 
+
+Then:
+
+![hidden_layer_1_calc](hidden_layer_1_calc.gif)
 
 And as a last step apply ReLU:
 
 ![hidden_layer_1_result](hidden_layer_1_result.gif) 
 
-Now we can add this result as input to the second hidden layer:
+Now we can add this result as input to the second hidden layer. So:
+
+![hidden_layer_2_init_calc](hidden_layer_2_init_calc.gif)
+
+And now we can use the result of the second hidden layer
+as input for the final layer:
 
 
-picture
 
 
 
