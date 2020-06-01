@@ -280,8 +280,8 @@ at the first row of our preprocessed dataset, we know that these input values we
 So thats completely wrong!
 
 Howevever this is no problem. We haven't actually trained our neural
-network yet, and so all the bias and weight values currently have no
-meaningfull relationship with the output at all. But how do you adjust all these parameters, so that our neural network can  predict the right value? First, we need something that can tell us how wrong the predictions of the neural network are.
+network yet, and so all output values currently have no
+meaningfull relationship with the target shrub species at all. But how do you adjust the weight and the bias parameters, so that our neural network can  predict the right shrub species? First, we need something that can tell us how wrong the predictions of the neural network are.
 
 # Cost function
 
