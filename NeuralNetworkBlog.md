@@ -275,24 +275,14 @@ And as a last step apply the sigmoid activation function:
 
 ![sigmoid_output](sigmoid_output.gif)
 
-So there we have it, we did a complete run from input to output (also
-called a **forward pass**) through our network. However, when we look
-at our table, we know that these input values we just used belong 
-to a Hazel Shrub, to which we assigned to number 0. Given that our predicted output is 0.65, and higher than 0.5, it means our network predicted the shrub
-to be the Alder Blackthorn Shrub, to which we assigned the number 1.
+So there we have it, we did a complete run from input to output through our network. This is also called a **forward pass**. However, when we look
+at the first row of our preprocessed dataset, we know that these input values we just used belong to a Hazel Shrub, to which we assigned to number 0. Given that our predicted output is 0.65, and higher than 0.5, it means our network predicted the shrub to be the Alder Blackthorn Shrub, to which we assigned the number 1.
 So thats completely wrong!
 
 Howevever this is no problem. We haven't actually trained our neural
-network yet, and all the bias and weight values are completely random.
-But how do you adjust all these parameters, so that they predict
-the right value?
-
+network yet, and so all the bias and weight values currently have no
+meaningfull relationship with the output at all. But how do you adjust all these parameters, so that our neural network can  predict the right value? First, we need something that can tell us how wrong the predictions of the neural network are.
 
 # Cost function
-
-The first thing we need when adjusting the weights and the bias values
-of our neural network is an algorithm that estimates how wrong
-our network is. If we want to update the networks bias and weights,
-we need to know how far we are off. This is why we need a cost function.
 
 <a href="http://www.codecogs.com" target="_blank"><img src="http://www.codecogs.com/images/poweredbycodecogs.png" border="0" title="CodeCogs - An Open Source Scientific Library" alt="CodeCogs - An Open Source Scientific Library"></a>
