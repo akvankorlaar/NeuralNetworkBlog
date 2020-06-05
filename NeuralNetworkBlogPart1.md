@@ -1,4 +1,11 @@
-# Deep Learning practical introduction using Python, Pandas and Keras
+# Deep Learning introduction part 1: Input data and neural network architecture
+
+This blog series is intended as an introduction into deep learning,
+with an emphasis on the theory and the math that drives this technology. For this blog series I will be using Python 3 and Pandas. Also, some familiarity with linear algebra (vectors, matrices) will help. This first part will be about preprocessing data, and outlines how a basic architecture
+of a feedforward neural network could look like.
+I hope you enjoy this series!
+
+## Introduction
 
 A  **neural network** is a computer algorithm composed of a
 network of artificial neurons. This network of
@@ -26,35 +33,17 @@ areas. With this technology becoming ever more
 usefull with each year, so does knowledge
 on how to build and train neural networks.
 
-In this introduction we will learn how a neural network
-works by building a neural network that is able to classify
-different types of shrubs based on their height and leave
-size. We will go through the process of
-preprocessing data, defining a neural network architecture,
-building a neural network,
-and finally training the neural network using our preprocessed
-data. Some familiarity with Python 3, Pandas and linear algebra (vectors
-, matrices, etc.) will help.
-
-Tutorials on Python and Pandas:
-* https://realpython.com/pandas-dataframe/
-* https://realpython.com
-* https://docs.python.org/3/tutorial/
-
-Tutorials on linear algebra:
-* https://www.khanacademy.org/math/linear-algebra
-* https://www.mathsisfun.com/algebra/matrix-introduction.html
-* https://www.mathsisfun.com/algebra/matrix-multiplying.html
-
 ## Input Data
 
 The most important thing when working with neural networks
-is not its architecture: Its the data. Why? You can
+is not the architecture of the neural network: Its the data. Why? You can
 build most complex neural network,
 but one rule always stays the same: **Garbage in = Garbage out**.
 So at the data we start! 
 
-For this example we will be using a generated dataset
+Throughout this series we will build a neural network
+that is able to classify different types of shrubs based on their height and leave
+size. We will be using a generated dataset
 that is located at:
 
 https://github.com/akvankorlaar/NeuralNetworkBlog/blob/master/shrub_dataset.csv
@@ -101,9 +90,11 @@ So our dataset has 100 rows, containing leave size and shrub
 height of two different shrub species. The task of the neural network
 will be to, given some shrub leave size, and some shrub height,
 to predict the shrub species. In this example the leave size and shrub height are the input features, and will be the neural networks input. The shrub species is what the neural network has to predict, and will be the neural networks output. In
-our example we will have 2 target classes: Hazel Shrub and Alder Buckthorn Shrub.
-We only have 2 classes here so the task is called a **binary classifcation**, because our neural network needs to be able to predict
-one of these two classes given the input data.
+our example we will have 2 shrub species: Hazel Shrub and Alder Buckthorn Shrub.
+Because our neural network has to be able to predict one of two different things, we
+have whats called 2 output **classes**, and this task is called a **binary classification**. So this is what we want:
+
+picture
 
 Note that for all these examples we already know the shrub species. Our
 goal was to make our neural network predict exactly this, so why do we look
@@ -281,8 +272,9 @@ So thats completely wrong!
 
 Howevever this is no problem. We haven't actually trained our neural
 network yet, and so all output values currently have no
-meaningfull relationship with the target shrub species at all. But how do you adjust the weight and the bias parameters, so that our neural network can  predict the right shrub species? First, we need something that can tell us how wrong the predictions of the neural network are.
+meaningfull relationship with the target shrub species at all. But how do you adjust the weight and the bias parameters, so that our neural network can  predict the right shrub species? We need something that can tell us how wrong the predictions of the neural network are, and use this to update the values of our weight and bias parameters. This will be the topic for the second part of this blog series.
 
-# Cost function
+Thanks for reading. Like you, I am also learning, so if you see any errors in the text, or if anything is unclear to you, please let me know.
+
 
 <a href="http://www.codecogs.com" target="_blank"><img src="http://www.codecogs.com/images/poweredbycodecogs.png" border="0" title="CodeCogs - An Open Source Scientific Library" alt="CodeCogs - An Open Source Scientific Library"></a>
