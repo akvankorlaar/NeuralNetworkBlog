@@ -1,7 +1,7 @@
 # Deep Learning introduction part 1: Input data and neural network architecture
 
 This blog series is intended as an introduction into deep learning,
-with an emphasis on the theory and the math that drives this technology. For this blog series I will be using Python 3 and Pandas. Also, some familiarity with linear algebra (vectors, matrices) will help. This first part will be about preprocessing data, and outlines how a basic architecture
+with an emphasis on the theory and the math that drives this technology. For this blog series I will be using Python 3 and Pandas. Also, some familiarity with linear algebra (vectors, matrices) will help. This first part will be about preprocessing example data, and outlines how a basic architecture
 of a feedforward neural network could look like.
 I hope you enjoy this series!
 
@@ -73,7 +73,7 @@ df
 
 df.count()
 """
-þLeave size (cm)       100
+Leave size (cm)       100
 Shrub height (m)      100
 Shrub species name    100
 """
@@ -90,11 +90,8 @@ So our dataset has 100 rows, containing leave size and shrub
 height of two different shrub species. The task of the neural network
 will be to, given some shrub leave size, and some shrub height,
 to predict the shrub species. In this example the leave size and shrub height are the input features, and will be the neural networks input. The shrub species is what the neural network has to predict, and will be the neural networks output. In
-our example we will have 2 shrub species: Hazel Shrub and Alder Buckthorn Shrub.
-Because our neural network has to be able to predict one of two different things, we
-have whats called 2 output **classes**, and this task is called a **binary classification**. So this is what we want:
-
-picture
+our example we will have 2 possible shrub species for the output: Hazel Shrub and Alder Buckthorn Shrub. So this means we will have 2 output **classess**. This task is a **classification** task, because given some input our neural network has to predict the output class.
+The fact that there are only 2 possible classes to predict makes this task a task a **binary classification**.
 
 Note that for all these examples we already know the shrub species. Our
 goal was to make our neural network predict exactly this, so why do we look
@@ -163,8 +160,7 @@ input value by a weight value, and adding some bias. For example:
 
 Where w is a **weight** value, and b is a **bias** value. The weights and the bias are the learnable **parameters** of the neural network. Without them our neural network would not be able to learn anything. Recall that we want to classify different types of shrub species based on their leaf size and shrub height. The goal when training a neural network is to create a model that is most likely able to explain the observed data, using these learnable parameters of the neural network. When training, the values
 of the weights and the bias are adjusted slightly every iteration,
-in an attempt to find their optimal values. How this happens
-will be discussed later on. Usually before training the weight
+in an attempt to find their optimal values. Usually before training the weight
 values are initialised at small random values, and the bias values
 are initialised at 0.
  
@@ -175,7 +171,7 @@ range, indicating the predicted shrub species.
 * A **hidden layer**. Any layer that is not the input layer or the output layer is called a hidden layer. Their outputs are not directly observable. A hidden layer can contain any
 number of artificial neurons, and it is up to us to decide how many hidden layers there are, and how many artificial neurons they have.
 
-We can chain these layers together. The number of hidden layers and the number of neurons in each layer is for us to decide. For this example, we will have the input layer, 3 artificial neurons in a first hidden layer, 3 artificial neurons in a second hidden layer and finally the output layer with 1 artificial neuron. From layer to layer, every artificial neuron is connected using weights.
+We can chain these layers together. For this example, we will have the input layer, 3 artificial neurons in a first hidden layer, 3 artificial neurons in a second hidden layer and finally the output layer with 1 artificial neuron. From layer to layer, every artificial neuron is connected using weights.
 This means that with 2 input elements
 and 3 neurons in the first hidden layer we will have (2 x 3 )
 6 weights in between. From the first hidden layer to the second hidden layer, we will have 9 weights (3 * 3), and from the second hidden layer to the final layer we will have 3 weights (3 * 1). The number of bias units equals
@@ -189,7 +185,7 @@ of our neural network (excluding the bias units):
  Fig1. Picture generated with help of http://alexlenail.me/NN-SVG/index.html
 
 
-The following is a mathematical representation of the neural network: 
+The following is a mathematical representation of the neural network until now: 
 
 ![equations1](equations1.gif) 
 
@@ -208,8 +204,7 @@ This is where the activation function becomes very important. What
 the activation function does is introduce some kind of nonlinearity to the
 output. There are many different kinds of activation functions,
 but the most common being the Rectified Linear Unit (**ReLU**). ReLU is currently
-very popular for usage in the hidden layers because of its simplicity, while still being very powerfull. ReLU is easily implemented, and also easily differientable. Why this last point is important will
-be discussed later on. ReLU is defined as:
+very popular for usage in the hidden layers because of its simplicity, while still being very powerfull. ReLU is easily implemented, and also easily differientable. ReLU is defined as:
 
 ![relu_equation](relu_equation.gif) 
 
@@ -274,7 +269,7 @@ Howevever this is no problem. We haven't actually trained our neural
 network yet, and so all output values currently have no
 meaningfull relationship with the target shrub species at all. But how do you adjust the weight and the bias parameters, so that our neural network can  predict the right shrub species? We need something that can tell us how wrong the predictions of the neural network are, and use this to update the values of our weight and bias parameters. This will be the topic for the second part of this blog series.
 
-Thanks for reading. Like you, I am also learning, so if you see any errors in the text, or if anything is unclear to you, please let me know.
+Thanks for reading this blog! Like you, I am also learning, so if you see any errors in the text, or if anything is unclear to you, please let me know.
 
 
 <a href="http://www.codecogs.com" target="_blank"><img src="http://www.codecogs.com/images/poweredbycodecogs.png" border="0" title="CodeCogs - An Open Source Scientific Library" alt="CodeCogs - An Open Source Scientific Library"></a>
